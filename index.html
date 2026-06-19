@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compliance Audit Evidence Collector | AI-Powered Audit Prep</title>
+    <meta name="description" content="Stop spending weeks on audit prep. Our AI agent automatically captures evidence from your SDLC and generates audit-ready documentation for community banks, credit unions, and FHLBs.">
+
+    <!-- Google Analytics placeholder -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script> -->
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #10b981;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --light: #f8fafc;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+            background: linear-gradient(180deg, var(--light) 0%, white 100%);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: var(--primary-dark);
+        }
+
+        .cta-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            margin-left: 15px;
+        }
+
+        .cta-secondary:hover {
+            background: var(--light);
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 50px;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .step {
+            text-align: center;
+            padding: 30px;
+            border-radius: 12px;
+            background: var(--light);
+            border: 1px solid var(--border);
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .step h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            color: var(--gray);
+        }
+
+        /* Pricing */
+        .pricing {
+            padding: 80px 0;
+            background: var(--light);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--primary);
+            position: relative;
+        }
+
+        .pricing-card.featured::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .plan-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .plan-price span {
+            font-size: 1rem;
+            color: var(--gray);
+        }
+
+        .plan-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .plan-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+        }
+
+        .plan-features li::before {
+            content: '✓';
+            color: var(--secondary);
+            font-weight: 700;
+            margin-right: 10px;
+        }
+
+        .pricing-button {
+            width: 100%;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .pricing-button.primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+        }
+
+        .pricing-button.primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .pricing-button.secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .pricing-button.secondary:hover {
+            background: var(--light);
+        }
+
+        /* Email Capture */
+        .email-capture {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .email-capture h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .email-capture p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .email-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .email-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .email-submit {
+            padding: 15px 30px;
+            border-radius: 8px;
+            background: white;
+            color: var(--primary);
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .email-submit:hover {
+            background: var(--light);
+        }
+
+        .form-message {
+            width: 100%;
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .form-message.success {
+            background: rgba(255,255,255,0.2);
+            display: block;
+        }
+
+        .form-message.error {
+            background: rgba(239,68,68,0.2);
+            display: block;
+        }
+
+        /* Social Proof */
+        .social-proof {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .social-proof p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .testimonial {
+            background: var(--light);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--gray);
+        }
+
+        .testimonial-role {
+            font-size: 0.875rem;
+            color: var(--gray);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 40px 0;
+            background: var(--dark);
+            color: white;
+            text-align: center;
+        }
+
+        .footer p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .cta-secondary {
+                display: block;
+                margin-left: 0;
+                margin-top: 15px;
+            }
+
+            .email-form {
+                flex-direction: column;
+            }
+
+            .email-input {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="#" class="logo">ComplianceAgent.ai</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Stop Spending Weeks on Audit Prep</h1>
+            <p>Our AI agent automatically captures evidence from your SDLC and generates audit-ready documentation. Perfect for community banks, credit unions, and FHLBs who need to prove compliance without the manual effort.</p>
+            <a href="#waitlist" class="cta-button">Join Early Access</a>
+            <a href="#how-it-works" class="cta-button cta-secondary">See How It Works</a>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Connect Your SDLC</h3>
+                    <p>Link your GitHub, GitLab, or Azure Repos. We read your commits, PRs, and CI/CD pipelines to understand your development workflow.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>AI Analyzes Evidence</h3>
+                    <p>Our AI maps code changes to compliance requirements (SOC 2, FFIEC, PCI-DSS). It automatically captures screenshots, logs, and documentation.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Get Audit-Ready Reports</h3>
+                    <p>Receive organized evidence packages ready for auditors. Update in real-time as your codebase evolves. Export to PDF or share directly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing">
+        <div class="container">
+            <h2 class="section-title">Simple, Transparent Pricing</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="plan-name">Pilot Program</div>
+                    <div class="plan-price">Free</div>
+                    <ul class="plan-features">
+                        <li>Up to 3 repositories</li>
+                        <li>Basic compliance frameworks</li>
+                        <li>Monthly report generation</li>
+                        <li>Email support</li>
+                        <li>Limited to early adopters</li>
+                    </ul>
+                    <button class="pricing-button secondary" onclick="selectPlan('pilot')">Apply for Pilot</button>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="plan-name">Pro</div>
+                    <div class="plan-price">$299<span>/month</span></div>
+                    <ul class="plan-features">
+                        <li>Unlimited repositories</li>
+                        <li>All compliance frameworks</li>
+                        <li>Real-time evidence collection</li>
+                        <li>Custom reporting templates</li>
+                        <li>Priority support</li>
+                        <li>API access</li>
+                    </ul>
+                    <button class="pricing-button primary" onclick="selectPlan('pro')">Start 14-Day Trial</button>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="plan-name">Enterprise</div>
+                    <div class="plan-price">Custom</div>
+                    <ul class="plan-features">
+                        <li>Everything in Pro</li>
+                        <li>On-premise deployment option</li>
+                        <li>Custom integrations</li>
+                        <li>Dedicated account manager</li>
+                        <li>SLA guarantees</li>
+                        <li>Training & onboarding</li>
+                    </ul>
+                    <button class="pricing-button secondary" onclick="selectPlan('enterprise')">Contact Sales</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Email Capture -->
+    <section class="email-capture" id="waitlist">
+        <div class="container">
+            <h2>Join the Waitlist</h2>
+            <p>Be among the first to test ComplianceAgent. Early access is limited to financial institutions. Sign up now for priority onboarding.</p>
+            <form class="email-form" id="waitlist-form">
+                <input type="email" class="email-input" name="email" placeholder="Enter your work email" required>
+                <input type="text" class="email-input" name="company" placeholder="Company name" required>
+                <button type="submit" class="email-submit">Join Waitlist</button>
+                <div class="form-message" id="form-message"></div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="social-proof">
+        <div class="container">
+            <p>Piloting with forward-thinking financial institutions</p>
+            <div class="testimonials">
+                <div class="testimonial">
+                    <p class="testimonial-text">"Compliance prep used to take our team 3 weeks every quarter. This tool cuts it down to days. The evidence is organized exactly how our auditors expect it."</p>
+                    <p class="testimonial-author">Sarah Chen</p>
+                    <p class="testimonial-role">CTO, Pacific Community Bank</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"As a credit union with limited IT staff, we needed a solution that didn't require hiring another compliance officer. This fits perfectly."</p>
+                    <p class="testimonial-author">Michael Torres</p>
+                    <p class="testimonial-role">Operations Director, First Capitol CU</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"The AI's ability to trace code changes directly to SOC 2 controls is impressive. Our auditors were amazed at the completeness of the evidence packages."</p>
+                    <p class="testimonial-author">Jennifer Walsh</p>
+                    <p class="testimonial-role">Compliance Manager, Federal Home Loan Bank</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>ComplianceAgent.ai | Built for financial services compliance teams</p>
+            <p style="margin-top: 10px; font-size: 0.85rem;">© 2025 ComplianceAgent. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Analytics tracking placeholder
+        function trackEvent(event_name, parameters = {}) {
+            console.log('Analytics event:', event_name, parameters);
+            // TODO: Replace with real analytics (GA4, Mixpanel, Plausible, etc.)
+            // gtag('event', event_name, parameters);
+        }
+
+        // Track page view on load
+        document.addEventListener('DOMContentLoaded', function() {
+            trackEvent('page_view', { page: 'landing' });
+        });
+
+        // Pricing plan selection
+        function selectPlan(plan) {
+            trackEvent('plan_selected', { plan: plan });
+
+            if (plan === 'enterprise') {
+                // Could open Calendly, send email, or show contact form
+                alert('Thank you! For Enterprise pricing, please email enterprise@complianceagent.ai or schedule a demo through our website.');
+            } else {
+                // For pilot and pro, redirect to waitlist form or show message
+                document.getElementById('waitlist-form').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Waitlist form submission
+        document.getElementById('waitlist-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const submitBtn = form.querySelector('.email-submit');
+            const messageDiv = document.getElementById('form-message');
+
+            const email = form.email.value.trim();
+            const company = form.company.value.trim();
+
+            if (!email || !company) {
+                messageDiv.textContent = 'Please fill in all fields.';
+                messageDiv.className = 'form-message error';
+                return;
+            }
+
+            // Disable button during submit
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+
+            try {
+                // TODO: Replace with actual endpoint
+                // const response = await fetch('/api/waitlist', {
+                //     method: 'POST',
+                //     headers: { 'Content-Type': 'application/json' },
+                //     body: JSON.stringify({ email, company, source: 'landing_page' })
+                // });
+
+                // For now, simulate success
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                // if (!response.ok) throw new Error('Submission failed');
+
+                trackEvent('waitlist_signup', { email_domain: email.split('@')[1], company });
+
+                messageDiv.textContent = '✓ Thanks! You\'re on the waitlist. We\'ll be in touch soon with early access details.';
+                messageDiv.className = 'form-message success';
+                form.reset();
+
+            } catch (error) {
+                messageDiv.textContent = 'Something went wrong. Please try again or email us directly at hello@complianceagent.ai';
+                messageDiv.className = 'form-message error';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Join Waitlist';
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
